@@ -86,6 +86,9 @@ var Visualizer = function(buffer) {
   this.draw();                                      // 描画開始
 };
 
+
+
+
 Visualizer.prototype.draw = function() {
   // 0~1まで設定でき、0に近いほど描画の更新がスムーズになり, 1に近いほど描画の更新が鈍くなる。
   this.analyserNode.smoothingTimeConstant = 0.5;
@@ -110,7 +113,13 @@ Visualizer.prototype.draw = function() {
     var height = ch * percent; // %に基づく高さを算出
     var offset = ch - height;  // y座標の描画開始位置を算出
 
-    ctx.fillStyle = '#000';
+	//add
+	let img = new Image();
+	img.onload = Start;
+	img.src = "./.";
+
+
+    ctx.createPattern(img, 'repeat');
     ctx.fillRect(i * barWidth, offset, barWidth, 2);
   }
 
