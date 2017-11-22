@@ -101,8 +101,10 @@ Visualizer.prototype.draw = function() {
   var barWidth = cw / this.analyserNode.frequencyBinCount;
 
 　var img = new Image();
-  img.src = "tesimg.png"
-  ctx.drawImage(img, 0, 0);
+  img.src = "tesimg.png" + new Date().getTime();
+  img.onload = function() {
+  	  ctx.drawImage(img, 0, 0);
+  }
   //ctx.fillStyle = 'rgba(0, 0, 255, 0.2)';
   ctx.fillRect(0, 0, cw, ch);
 
