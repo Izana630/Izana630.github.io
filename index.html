@@ -2,7 +2,7 @@
 <html>
 	<script>
 		var img = new Image();
-  		img.src = "testimg2.png"
+  		img.src = "testimg2.gif"
 	</script>
 <head>
 <meta charset="utf-8">
@@ -12,7 +12,7 @@ body {
   margin: 0;
   color: #fff;
   <!--background: #000;-->
-	background="testimg2.png"
+	<!--background="testimg2.gif"-->
 }
 </style>
 </head>
@@ -115,15 +115,15 @@ Visualizer.prototype.draw = function() {
   //}
   //ctx.fillStyle = 'rgba(0, 0, 255, 0.2)';
 	
-  ctx.fillRect(0, 0, cw, ch);
-
+  //ctx.fillRect(0, 0, cw, ch);
+ctx.drawImage(img, 0, 0);
   // analyserNode.frequencyBinCountはanalyserNode.fftSize / 2の数値。よって今回は1024。
   for (var i = 0; i < this.analyserNode.frequencyBinCount; ++i) {
     var value = this.times[i]; // 波形データ 0 ~ 255までの数値が格納されている。
     var percent = value / 255; // 255が最大値なので波形データの%が算出できる。
     var height = ch * percent; // %に基づく高さを算出
     var offset = ch - height;  // y座標の描画開始位置を算出
- ctx.drawImage(img, 0, 0);
+ 
     ctx.fillStyle = 'rgba(255, 255, 255, 1)';
     ctx.fillRect(i * barWidth, offset, barWidth, 2);
   }
