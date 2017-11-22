@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+	<script>
+		var img = new Image();
+  		img.src = "tesimg.png"
+	</script>
 <head>
 <meta charset="utf-8">
 <title>getByteTimeDomainDataで取得した波形データを描画する。</title>
@@ -12,9 +16,14 @@ body {
 }
 </style>
 </head>
-<body backbround = "tesimg.png"> 
+<body onload = "draw1()"> 
 <canvas id="canvas"></canvas>
 <script type="text/javascript">
+function draw1(){
+	var ctx = .getElementById("cv1").getContext("2d");
+	 ctx.drawImage(img,0,0);
+}
+	
 // canvas要素を取得
 var c = document.getElementById('canvas');
 var cw;
@@ -100,11 +109,10 @@ Visualizer.prototype.draw = function() {
   // 全ての波形データを描画するために、一つの波形データのwidthを算出する。
   var barWidth = cw / this.analyserNode.frequencyBinCount;
 
-　var img = new Image();
-  img.src = "tesimg.png?" + new Date().getTime();
-  img.onload = function() {
-  	  ctx.drawImage(img, 0, 0);
-  }
+　
+  //img.onload = function() {
+ // 	  ctx.drawImage(img, 0, 0);
+  //}
   //ctx.fillStyle = 'rgba(0, 0, 255, 0.2)';
   ctx.fillRect(0, 0, cw, ch);
 
