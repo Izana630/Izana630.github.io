@@ -19,7 +19,7 @@ body {
 <body onload = "draw1()"> 
 <canvas id="canvas"></canvas>
 <script type="text/javascript">
-function draw1(){
+function draw1(){ //画像プリロード
 	var ctx = document.getElementById("canvas").getContext("2d");
 	 ctx.drawImage(img,0,0);
 }
@@ -115,8 +115,8 @@ Visualizer.prototype.draw = function() {
   //}
   //ctx.fillStyle = 'rgba(0, 0, 255, 0.2)';
 	
-  //ctx.fillRect(0, 0, cw, ch);
-ctx.drawImage(img, 0, 0);
+  //ctx.fillRect(0, 0, cw, ch);//背景塗りつぶし
+  ctx.drawImage(img, 0, 0);
   // analyserNode.frequencyBinCountはanalyserNode.fftSize / 2の数値。よって今回は1024。
   for (var i = 0; i < this.analyserNode.frequencyBinCount; ++i) {
     var value = this.times[i]; // 波形データ 0 ~ 255までの数値が格納されている。
@@ -124,8 +124,8 @@ ctx.drawImage(img, 0, 0);
     var height = ch * percent; // %に基づく高さを算出
     var offset = ch - height;  // y座標の描画開始位置を算出
  
-    ctx.fillStyle = 'rgba(255, 255, 255, 1)';
-    ctx.fillRect(i * barWidth, offset, barWidth, 2);
+    ctx.fillStyle = 'rgba(255, 255, 255, 1)'; //波形の色
+    ctx.fillRect(i * barWidth, offset, barWidth, 2);//波形描画？
   }
 
   window.requestAnimationFrame(this.draw.bind(this));
