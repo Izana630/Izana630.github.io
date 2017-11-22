@@ -114,12 +114,12 @@ Visualizer.prototype.draw = function() {
     var offset = ch - height;  // y座標の描画開始位置を算出
 
 	//add
-	let img = new Image();
-	img.onload = Start;
-	img.src = "./.";
+	//let img = new Image();
+	//img.onload = Start;
+	//img.src = "tesimg.png";
 
 
-    ctx.fillstyle = 'rgba(0, 0, 0, 0)'
+    ctx.fillstyle = 'rgba(0, 0, 0, 1)'
     ctx.fillRect(i * barWidth, offset, barWidth, 2);
   }
 
