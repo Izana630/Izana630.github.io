@@ -100,7 +100,10 @@ Visualizer.prototype.draw = function() {
   // 全ての波形データを描画するために、一つの波形データのwidthを算出する。
   var barWidth = cw / this.analyserNode.frequencyBinCount;
 
-  ctx.fillStyle = 'rgba(0, 0, 255, 0.2)';
+　var img = new Image();
+  img.src = "tesimg.png"
+  ctx.drawImage(img, 0, 0);
+  //ctx.fillStyle = 'rgba(0, 0, 255, 0.2)';
   ctx.fillRect(0, 0, cw, ch);
 
   // analyserNode.frequencyBinCountはanalyserNode.fftSize / 2の数値。よって今回は1024。
