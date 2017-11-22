@@ -2,42 +2,42 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>getByteTimeDomainData‚Åæ“¾‚µ‚½”gŒ`ƒf[ƒ^‚ğ•`‰æ‚·‚éB</title>
+<title>getByteTimeDomainDataã§å–å¾—ã—ãŸæ³¢å½¢ãƒ‡ãƒ¼ã‚¿ã‚’æç”»ã™ã‚‹ã€‚</title>
 <style>
 body {
   margin: 0;
   color: #fff;
-  background: #000;
+  <!--background: #000;-->
 }
 </style>
 </head>
 <body>
 <canvas id="canvas"></canvas>
 <script type="text/javascript">
-// canvas—v‘f‚ğæ“¾
+// canvasè¦ç´ ã‚’å–å¾—
 var c = document.getElementById('canvas');
 var cw;
 var ch;
 
-// canvasƒTƒCƒY‚ğwindowƒTƒCƒY‚É‚·‚é
+// canvasã‚µã‚¤ã‚ºã‚’windowã‚µã‚¤ã‚ºã«ã™ã‚‹
 c.width = cw = window.innerWidth;
 c.height = ch = window.innerHeight;
 
-// •`‰æ‚É•K—v‚ÈƒRƒ“ƒeƒLƒXƒg(canvas‚É•`‰æ‚·‚é‚½‚ß‚ÌAPI‚ÉƒAƒNƒZƒX‚Å‚«‚éƒIƒuƒWƒFƒNƒg)‚ğæ“¾
+// æç”»ã«å¿…è¦ãªã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ(canvasã«æç”»ã™ã‚‹ãŸã‚ã®APIã«ã‚¢ã‚¯ã‚»ã‚¹ã§ãã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ)ã‚’å–å¾—
 var ctx = c.getContext('2d');
 
-// AudioNode‚ğŠÇ—‚·‚éAudioContext‚Ì¶¬
+// AudioNodeã‚’ç®¡ç†ã™ã‚‹AudioContextã®ç”Ÿæˆ
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 
 /**
- * ‰¹ºƒtƒ@ƒCƒ‹ƒ[ƒ_[
+ * éŸ³å£°ãƒ•ã‚¡ã‚¤ãƒ«ãƒ­ãƒ¼ãƒ€ãƒ¼
  */
 var Loader = function(url) {
-  this.url = url;  // “Ç‚İ‚Ş‰¹ºƒf[ƒ^‚ÌURL
+  this.url = url;  // èª­ã¿è¾¼ã‚€éŸ³å£°ãƒ‡ãƒ¼ã‚¿ã®URL
 };
 
-// XMLHttpRequest‚ğ—˜—p‚µ‚Ä‰¹ºƒf[ƒ^(ƒoƒbƒtƒ@)‚ğ“Ç‚İ‚ŞB
+// XMLHttpRequestã‚’åˆ©ç”¨ã—ã¦éŸ³å£°ãƒ‡ãƒ¼ã‚¿(ãƒãƒƒãƒ•ã‚¡)ã‚’èª­ã¿è¾¼ã‚€ã€‚
 Loader.prototype.loadBuffer = function() {
   var loader, request;
   loader = this;
@@ -46,13 +46,13 @@ Loader.prototype.loadBuffer = function() {
   request.responseType = 'arraybuffer';
 
   request.onload = function() {
-    // æ“¾‚µ‚½ƒf[ƒ^‚ğƒfƒR[ƒh‚·‚éB
+    // å–å¾—ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰ã™ã‚‹ã€‚
     audioCtx.decodeAudioData(this.response, function(buffer) {
       if (!buffer) {
         console.log('error');
         return;
       }
-      loader.playSound(buffer);  // ƒfƒR[ƒh‚³‚ê‚½ƒf[ƒ^‚ğÄ¶‚·‚éB
+      loader.playSound(buffer);  // ãƒ‡ã‚³ãƒ¼ãƒ‰ã•ã‚ŒãŸãƒ‡ãƒ¼ã‚¿ã‚’å†ç”Ÿã™ã‚‹ã€‚
     }, function(error) {
       console.log('decodeAudioData error');
     });
@@ -65,49 +65,49 @@ Loader.prototype.loadBuffer = function() {
   request.send();
 };
 
-// “Ç‚İ‚ñ‚¾‰¹ºƒf[ƒ^(ƒoƒbƒtƒ@)‚ğÄ¶‚Æ”gŒ`ƒf[ƒ^‚Ì•`‰æ‚ğŠJn‚·‚éB
+// èª­ã¿è¾¼ã‚“ã éŸ³å£°ãƒ‡ãƒ¼ã‚¿(ãƒãƒƒãƒ•ã‚¡)ã‚’å†ç”Ÿã¨æ³¢å½¢ãƒ‡ãƒ¼ã‚¿ã®æç”»ã‚’é–‹å§‹ã™ã‚‹ã€‚
 Loader.prototype.playSound = function(buffer) {
   var visualizer = new Visualizer(buffer);
 };
 
 
 /**
- * ƒrƒWƒ…ƒAƒ‰ƒCƒU[
+ * ãƒ“ã‚¸ãƒ¥ã‚¢ãƒ©ã‚¤ã‚¶ãƒ¼
  */
 var Visualizer = function(buffer) {
-  this.sourceNode = audioCtx.createBufferSource();  // AudioBufferSourceNode‚ğì¬
-  this.sourceNode.buffer = buffer;                  // æ“¾‚µ‚½‰¹ºƒf[ƒ^(ƒoƒbƒtƒ@)‚ğ‰¹Œ¹‚Éİ’è
-  this.analyserNode = audioCtx.createAnalyser();    // AnalyserNode‚ğì¬
-  this.times = new Uint8Array(this.analyserNode.frequencyBinCount);  // ŠÔ—Ìˆæ‚Ì”gŒ`ƒf[ƒ^‚ğŠi”[‚·‚é”z—ñ‚ğ¶¬ 
-  this.sourceNode.connect(this.analyserNode);       // AudioBufferSourceNode‚ğAnalyserNode‚ÉÚ‘±
-  this.analyserNode.connect(audioCtx.destination);  // AnalyserNode‚ğAudioDestinationNode‚ÉÚ‘±
-  this.sourceNode.start(0);                         // Ä¶ŠJn
-  this.draw();                                      // •`‰æŠJn
+  this.sourceNode = audioCtx.createBufferSource();  // AudioBufferSourceNodeã‚’ä½œæˆ
+  this.sourceNode.buffer = buffer;                  // å–å¾—ã—ãŸéŸ³å£°ãƒ‡ãƒ¼ã‚¿(ãƒãƒƒãƒ•ã‚¡)ã‚’éŸ³æºã«è¨­å®š
+  this.analyserNode = audioCtx.createAnalyser();    // AnalyserNodeã‚’ä½œæˆ
+  this.times = new Uint8Array(this.analyserNode.frequencyBinCount);  // æ™‚é–“é ˜åŸŸã®æ³¢å½¢ãƒ‡ãƒ¼ã‚¿ã‚’æ ¼ç´ã™ã‚‹é…åˆ—ã‚’ç”Ÿæˆ 
+  this.sourceNode.connect(this.analyserNode);       // AudioBufferSourceNodeã‚’AnalyserNodeã«æ¥ç¶š
+  this.analyserNode.connect(audioCtx.destination);  // AnalyserNodeã‚’AudioDestinationNodeã«æ¥ç¶š
+  this.sourceNode.start(0);                         // å†ç”Ÿé–‹å§‹
+  this.draw();                                      // æç”»é–‹å§‹
 };
 
 Visualizer.prototype.draw = function() {
-  // 0~1‚Ü‚Åİ’è‚Å‚«A0‚É‹ß‚¢‚Ù‚Ç•`‰æ‚ÌXV‚ªƒXƒ€[ƒY‚É‚È‚è, 1‚É‹ß‚¢‚Ù‚Ç•`‰æ‚ÌXV‚ª“İ‚­‚È‚éB
+  // 0~1ã¾ã§è¨­å®šã§ãã€0ã«è¿‘ã„ã»ã©æç”»ã®æ›´æ–°ãŒã‚¹ãƒ ãƒ¼ã‚ºã«ãªã‚Š, 1ã«è¿‘ã„ã»ã©æç”»ã®æ›´æ–°ãŒéˆããªã‚‹ã€‚
   this.analyserNode.smoothingTimeConstant = 0.5;
 
-  // FFTƒTƒCƒY‚ğw’è‚·‚éBƒfƒtƒHƒ‹ƒg‚Í2048B
+  // FFTã‚µã‚¤ã‚ºã‚’æŒ‡å®šã™ã‚‹ã€‚ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¯2048ã€‚
   this.analyserNode.fftSize = 2048;
 
-  // ŠÔ—Ìˆæ‚Ì”gŒ`ƒf[ƒ^‚ğˆø”‚Ì”z—ñ‚ÉŠi”[‚·‚éƒƒ\ƒbƒhB
-  // analyserNode.fftSize / 2‚Ì—v‘f‚ªthis.times‚ÉŠi”[‚³‚ê‚éB¡‰ñ‚Ì”z—ñ‚Ì—v‘f”‚Í1024B
+  // æ™‚é–“é ˜åŸŸã®æ³¢å½¢ãƒ‡ãƒ¼ã‚¿ã‚’å¼•æ•°ã®é…åˆ—ã«æ ¼ç´ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ã€‚
+  // analyserNode.fftSize / 2ã®è¦ç´ ãŒthis.timesã«æ ¼ç´ã•ã‚Œã‚‹ã€‚ä»Šå›ã®é…åˆ—ã®è¦ç´ æ•°ã¯1024ã€‚
   this.analyserNode.getByteTimeDomainData(this.times);
 
-  // ‘S‚Ä‚Ì”gŒ`ƒf[ƒ^‚ğ•`‰æ‚·‚é‚½‚ß‚ÉAˆê‚Â‚Ì”gŒ`ƒf[ƒ^‚Ìwidth‚ğZo‚·‚éB
+  // å…¨ã¦ã®æ³¢å½¢ãƒ‡ãƒ¼ã‚¿ã‚’æç”»ã™ã‚‹ãŸã‚ã«ã€ä¸€ã¤ã®æ³¢å½¢ãƒ‡ãƒ¼ã‚¿ã®widthã‚’ç®—å‡ºã™ã‚‹ã€‚
   var barWidth = cw / this.analyserNode.frequencyBinCount;
 
-  ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
   ctx.fillRect(0, 0, cw, ch);
 
-  // analyserNode.frequencyBinCount‚ÍanalyserNode.fftSize / 2‚Ì”’lB‚æ‚Á‚Ä¡‰ñ‚Í1024B
+  // analyserNode.frequencyBinCountã¯analyserNode.fftSize / 2ã®æ•°å€¤ã€‚ã‚ˆã£ã¦ä»Šå›ã¯1024ã€‚
   for (var i = 0; i < this.analyserNode.frequencyBinCount; ++i) {
-    var value = this.times[i]; // ”gŒ`ƒf[ƒ^ 0 ~ 255‚Ü‚Å‚Ì”’l‚ªŠi”[‚³‚ê‚Ä‚¢‚éB
-    var percent = value / 255; // 255‚ªÅ‘å’l‚È‚Ì‚Å”gŒ`ƒf[ƒ^‚Ì%‚ªZo‚Å‚«‚éB
-    var height = ch * percent; // %‚ÉŠî‚Ã‚­‚‚³‚ğZo
-    var offset = ch - height;  // yÀ•W‚Ì•`‰æŠJnˆÊ’u‚ğZo
+    var value = this.times[i]; // æ³¢å½¢ãƒ‡ãƒ¼ã‚¿ 0 ~ 255ã¾ã§ã®æ•°å€¤ãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹ã€‚
+    var percent = value / 255; // 255ãŒæœ€å¤§å€¤ãªã®ã§æ³¢å½¢ãƒ‡ãƒ¼ã‚¿ã®%ãŒç®—å‡ºã§ãã‚‹ã€‚
+    var height = ch * percent; // %ã«åŸºã¥ãé«˜ã•ã‚’ç®—å‡º
+    var offset = ch - height;  // yåº§æ¨™ã®æç”»é–‹å§‹ä½ç½®ã‚’ç®—å‡º
 
     ctx.fillStyle = '#fff';
     ctx.fillRect(i * barWidth, offset, barWidth, 2);
@@ -116,7 +116,7 @@ Visualizer.prototype.draw = function() {
   window.requestAnimationFrame(this.draw.bind(this));
 };
 
-// requestAnimationFrame‚ğ‘½‚­‚Ìƒuƒ‰ƒEƒU‚Å—˜—p‚·‚é‚½‚ß‚Éprefix‚Ì‹LÚ
+// requestAnimationFrameã‚’å¤šãã®ãƒ–ãƒ©ã‚¦ã‚¶ã§åˆ©ç”¨ã™ã‚‹ãŸã‚ã«prefixã®è¨˜è¼‰
 var setUpRAF = function() {
   var requestAnimationFrame = window.requestAnimationFrame ||
                               window.mozRequestAnimationFrame ||
