@@ -101,7 +101,7 @@ Visualizer.prototype.draw = function() {
   var barWidth = cw / this.analyserNode.frequencyBinCount;
 
 　var img = new Image();
-  img.src = "tesimg.png" + new Date().getTime();
+  img.src = "tesimg.png?" + new Date().getTime();
   img.onload = function() {
   	  ctx.drawImage(img, 0, 0);
   }
