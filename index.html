@@ -8,10 +8,11 @@ body {
   margin: 0;
   color: #fff;
   <!--background: #000;-->
+	background="tesimg.png"
 }
 </style>
 </head>
-<body background="tesimg.png">
+<body> 
 <canvas id="canvas"></canvas>
 <script type="text/javascript">
 // canvas要素を取得
@@ -99,7 +100,7 @@ Visualizer.prototype.draw = function() {
   // 全ての波形データを描画するために、一つの波形データのwidthを算出する。
   var barWidth = cw / this.analyserNode.frequencyBinCount;
 
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  ctx.fillStyle = 'rgba(0, 0, 0, 0)';
   ctx.fillRect(0, 0, cw, ch);
 
   // analyserNode.frequencyBinCountはanalyserNode.fftSize / 2の数値。よって今回は1024。
