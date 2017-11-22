@@ -119,7 +119,7 @@ Visualizer.prototype.draw = function() {
 	img.src = "./.";
 
 
-    ctx.createPattern(img, 'repeat');
+    ctx.fillstyle = 'rgba(0, 0, 0, 0)'
     ctx.fillRect(i * barWidth, offset, barWidth, 2);
   }
 
